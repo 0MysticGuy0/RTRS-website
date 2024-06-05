@@ -1,0 +1,89 @@
+
+.footer{
+    --text-size:14px;
+    --primarty-color: #3aa0cc;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:40px;
+    justify-content: center;
+    background-color: white;
+    padding: 20px;
+
+    
+}
+
+.right{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+.logo{
+    width: 55px;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.text{
+    font-size: var(--text-size);
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--primary-color);
+}
+.gray{
+    color: #ACACAC;
+}
+
+.contactsBtns{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+
+}
+.contactBtn{
+    width: 27px;
+    height: 27px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('/public/tg.png');
+    background-color: rgba(255, 255, 255, 0.80);
+    background-blend-mode: overlay;
+}
+.contactBtn:hover{
+    scale: 1.2;
+    transition: all 0.1s ease 0s;
+}
+.rutube{
+    background-image: url('/public/rutube.svg');
+}
+.vk{
+    background-image: url('/public/vk.png');
+}
+.ok{
+    background-image: url('/public/ok.png');
+}
+
+.questionsBtn{
+    color: var(--primary-color);
+    width: 30px;
+    cursor: pointer;
+}
+.questionsBtn:hover{
+    scale: 1.2;
+    transition: all 0.1s ease 0s;
+}
+
+.docs{
+    margin-block: -10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}

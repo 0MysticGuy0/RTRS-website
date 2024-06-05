@@ -1,0 +1,14 @@
+
+.mySelect{
+    width: 100%;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 400;
+}
+.mySelect:focus{
+    box-shadow: 0px 0px 5px #3ba4d1;
+    outline: none;
+}

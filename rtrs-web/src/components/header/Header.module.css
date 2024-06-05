@@ -1,0 +1,39 @@
+
+.header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-inline: 20px;
+    background: linear-gradient( 180deg, white , #FFFFFF00);
+}
+
+.header__end{
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap:10px;
+}
+
+.headerInfo{
+    text-transform: uppercase;
+    color:black;
+    font-size: 14px;
+}
+.bold{
+    font-weight: 900;
+}
+.phoneBtn{
+    color: #3aa0cc;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo{
+    margin: 20px;
+    width: 194px;
+    cursor: pointer;
+}

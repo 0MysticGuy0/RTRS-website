@@ -1,0 +1,26 @@
+
+.visionBtn{
+    --primary-color:#3ba4d1;
+    --text-size: 14px;
+
+    background-color: var(--primary-color);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 0 0 7px 7px;
+}
+
+.glasses{
+    color:white;
+    width: 32px;
+}
+
+.text{
+    color: white;
+    font-size: var(--text-size);
+    font-weight: 800;
+    text-transform: uppercase;
+}
