@@ -6,13 +6,12 @@ function NavPannel({active}){
     const nav = useNavigate()
 
     const currentTab = useLocation().pathname
-    console.log(currentTab)
 
     const tabs = useMemo(()=>[
         {name:'Работа объектов вещания', path:'/personal/objects-info'},
-        {name:'Обращения', path:'/login'},
-        {name:'Типовые вопросы', path:'/a'},
-        {name:'Телепрограмма', path:'/b'},
+        {name:'Обращения', path:'/personal/appeals'},
+        {name:'Типовые вопросы', path:'/personal/faq'},
+        {name:'Телепрограмма', path:'/personal/programs'},
         {name:'Настройки', path:'/c'},
     ],[])
 

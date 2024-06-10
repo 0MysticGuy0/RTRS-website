@@ -15,29 +15,30 @@
     top:0;
     z-index: 100;
 
-    display: flex;
+    /* display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 
     background-color: white;
     background: var(--primary-color);
     
 }
 .navPannel:hover{
-
+    border-right: 1px solid white;
 }
 .navPannel:hover .navPannel__open{
     width: 0px;
     transform: scaleX(0);
 }
 .navPannel:hover .menu{
-    position: relative;
+    position: sticky;
     width: auto;
     transform: scaleX(1);
     transition: all 0.3s ease 0s;
 }
 .navPannel__open{
+    position: sticky;
     padding: 5px;
     transform-origin: 0;
 }

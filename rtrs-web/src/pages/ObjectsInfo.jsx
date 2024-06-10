@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Footer from '../components/footer/Footer';
 import HeaderSmall from '../components/header/HeaderSmall';
 import '../styles/App-authorized.css'
@@ -7,24 +7,53 @@ import { useLocation } from 'react-router-dom';
 import Question from '../components/question/Question';
 import MySelect from '../components/UI/MySelect/MySelect';
 import Channel from '../components/channel/Channel';
+import { useFetching } from '../hooks/useFetching';
+import axios from 'axios';
+import APIService from '../API/APIService';
+import { type } from '@testing-library/user-event/dist/type';
+import Loading from '../components/loading/Loading';
 
 function ObjectsInfo(){
     const [userData, setUserData] = useState({email:'', password:'', name:'Влад', phone:'', address:'', gender:''})
-    const [filters, setFilters] = useState({location:'', type:''})
+    const [filters, setFilters] = useState({location:'1', type:'All'})
 
-    const locations = [{id:0, name: 'Амурская обл.'},{id:1, name: 'Тамбовский р-н'},{id:2, name: 'Ивановский р-н'}]
-    const types = [{id:0, name: 'ТВ и радио'},{id:1, name: 'ТВ'},{id:2, name: 'Радио'}]
-    const data=[{id:0, name: 'РТРС-1 (+6), ТРМ - Амурский', TVC: 34, frequency: 578, type:1},
-        {id:1, name: 'РТРС-1 (+6), ТРМ - Амурский', TVC: 34, frequency: 578, type:1},
-        {id:2, name: 'РТРС-1 (+6), ТРМ - Амурский', TVC: 34, frequency: 578, type:1},
-    ]
+    const types = [{value:"All", name: 'ТВ и радио'},{value:"TV", name: 'ТВ'},{value:"Radio", name: 'Радио'}]
+
+    const [translationObjects, setTranslationObjects] = useState([])
+    const [channels, setChannels] = useState([])
+
+    const sortedChannels = useMemo(()=>{
+        const res = channels.filter(ch => filters.type=== 'All' || !(Boolean(ch.tvc) ^ filters.type=== 'TV'))
+                            .filter(ch => 
+                                ch.translationObjects.map(to => String(to.id)).includes(String(filters.location)) )
+        return res
+    }, [filters, channels])
+
+    //fetchers
+    const [fetchTranslationObjects, isLoadingTranslationObjects, translationObjectsError] = useFetching(async () =>{
+        const responce = await APIService.getAllTranslationObjects()
+        //console.log('fetched ', responce)
+        setTranslationObjects([...responce.data])
+    })
+    const [fetchChannels, isLoadingChannels, ChannelsError] = useFetching(async () =>{
+        const responce = await APIService.getAllChannels()
+        console.log('fetched ', responce)
+        setChannels([...responce.data])
+    })
+
+    //initializers
 
     const locationOptions = useMemo(()=>{
-        return locations.map((l) => {return {value:l.id, name: l.name}})
-    },[locations])
+        return translationObjects.map((to) => {return {value:to.id, name: to.name}})
+    },[translationObjects])
     const typeOptions = useMemo(()=>{
-        return types.map((l) => {return {value:l.id, name: l.name}})
-    },[locations])
+        return types.map((t) => {return {value:t.value, name: t.name}})
+    },[types])
+
+    useEffect(()=>{
+        fetchTranslationObjects()
+        fetchChannels()
+    },[])
 
     return (
         <div className='page objects-info-page'>
@@ -53,14 +82,16 @@ function ObjectsInfo(){
                     </div>
 
                     {
-                        data.map(ch => (
-                            <Channel key={ch.id} name={ch.name} TVC={ch.TVC} frequency={ch.frequency} />
+                        isLoadingChannels?
+                        <Loading/> :
+                        sortedChannels?.map(ch => (
+                            <Channel key={ch.id} name={ch.name} TVC={ch.tvc ?? '-'} frequency={ch.frequency} />
                         ))
                     }
                 </div>
             </div>
 
-            <Footer/>
+            <Footer showFAQ={false}/>
         </div>
     )
 }

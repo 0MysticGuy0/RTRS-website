@@ -14,14 +14,19 @@
      align-items: stretch;
      background-color: white;
      border-radius: 20px;
+     border: 1px solid lightgray;
+}
+.channel:hover{
+    box-shadow: 0 0 3px black;
+    transition: all 0.2s ease 0s;
 }
 
 .top{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     padding: 20px;
-    font-size: calc(var(--normal-size) + 1px);
+    font-size: calc(var(--normal-size) + 2px);
 }
 .bottom{
     display: flex;

@@ -1,0 +1,51 @@
+
+.channelProgram{
+    /*-=-=-TEXT-=-=-*/
+    --subnormal-size:14px;
+    --normal-size:15px;
+    --big-normal-size:20px;
+    --header-size:42px;
+    --part-size: 30px;
+    /*-=-=--=-=-*/
+    --primary-color:#3ba4d1;
+
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 30%;
+}
+.top{
+    background-color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 15px;
+    font-size: var(--part-size);
+    font-weight: 700;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:10px
+}
+.logo{
+    width: 35px;
+}
+
+.verticalDiv{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.horizontalDiv{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.bold{
+    font-weight: 700;
+}
+
+.disabled{
+    display: none;
+}

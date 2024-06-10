@@ -48,7 +48,7 @@ h3{
 .page{
     background-color: whitesmoke;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -71,4 +71,66 @@ h3{
     display: flex;
     flex-direction: row;
     gap: 10px;
+    align-items: center;
+}
+
+.appeals-page__addBtn{
+    font-size: 55px;
+    color: var(--primary-color);
+    font-weight: 900;
+    padding-inline:5px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+.appeals-page__addBt:hover{
+    scale: 1.1;
+}
+
+.changeDateBtn{
+
+    --rotate:0deg;
+    --size:40px;
+    width: var(--size);
+    height: var(--size);
+    rotate: var(--rotate);
+
+    background-color: transparent;
+    background-image: url('/public/next.svg');
+    background-origin: 50%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border:none;
+
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.1s ease  0s;
+}
+.changeDateBtn:hover{
+    scale: 1.1;
+    transition: all 0.1s ease  0s;
+}
+.changeDateBtn:disabled{
+    display: none;
+}
+.programs-page__date{
+    font-size: var(--part-size);
+    border: 1px solid gray;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: progress;
+}
+
+
+.programs-page__channels{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-x: auto;
+    gap:20px;
 }
