@@ -6,12 +6,15 @@ function Question({question, answer}){
 
     const curStyles = [styles.question]
     if(opened){
+        if(opened){
+            console.log('123131231')
+        }
         curStyles.push(styles.active)
     }
 
     return (
         <div className={curStyles.join(' ')}>
-            <div class={styles.question__head} onClick={()=>setOpened(!opened)}>
+            <div className={styles.question__head} onClick={()=>setOpened(!opened)}>
                 <img className={styles.question__icon} src='/top.png' width='20px' alt='посмотреть ответ'/>
                 {question}
             </div>

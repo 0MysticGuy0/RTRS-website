@@ -1,0 +1,84 @@
+
+.header{
+    --subnormal-size:14px;
+    --normal-size:15px;
+    --header-size:42px;
+    --part-size: 30px;
+
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-inline: 20px;
+    background: white
+}
+
+.header__start{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-block: 10px;
+    cursor: pointer;
+}
+
+.name{
+    font-size: calc(var(--header-size) / 2);
+    font-weight: 900;
+}
+
+
+.header__end{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap:20px;
+}
+
+.headerInfo{
+    text-transform: uppercase;
+    color:black;
+    font-size: var(--subnormal-size);
+}
+.bold{
+    font-weight: 900;
+}
+.phoneBtn{
+    color: #3aa0cc;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo{
+    width: 42px;
+    cursor: pointer;
+}
+
+.account{
+    border-left: 1px solid lightgray;
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 10px;
+    height: 100%;
+    font-size: var(--normal-size);
+}
+.account__icon{
+    width: 20px;
+    opacity: 0.35;
+}
+
+.accountBtn{
+    text-transform: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-decoration: underline;
+}
+.logOutBtn{
+    margin-left: 5px;
+    cursor: pointer;
+    color: gray;
+    text-decoration: underline;
+}

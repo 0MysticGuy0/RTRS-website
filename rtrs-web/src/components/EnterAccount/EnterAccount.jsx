@@ -1,8 +1,13 @@
 import MyInput from "../UI/MyInput/MyInput";
 import '../../styles/App.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function EnterAccount({userData, setUserData, rememberUser, setRememberUser,setIsregistrating, showPassword, setShowPassword}){
+    const cabinetNav = useNavigate()
+    function login(){
+        cabinetNav('/personal/objects-info',{restart:true})
+    }
+
     return(
         <div className="login-page__right">
         <div className='login'>
@@ -20,7 +25,7 @@ function EnterAccount({userData, setUserData, rememberUser, setRememberUser,setI
                     width='30px' src='/eye.png' alt='кнопка показать или скрыть пароль'/>
             </div>
 
-            <button className="login__btn" onClick={()=> {console.log(userData)}}>ВОЙТИ</button>
+            <button className="login__btn" onClick={()=> {console.log(userData); login()}}>ВОЙТИ</button>
 
             <div className="login__extra">
                 <div className="remember">

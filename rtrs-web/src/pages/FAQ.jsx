@@ -101,8 +101,8 @@ function FAQ(){
                 question: 'РТРС.ПЛЮС. СТОИМОСТЬ УСЛУГ ТРАНСЛЯЦИИ ДЛЯ ЗРИТЕЛЕЙ',
                 answer: 'Все федеральные и уральские телеканалы на платформе «РТРС.ПЛЮС» будут транслироваться для зрителей бесплатно.'
             },
-    
     )
+    console.log('qustions-=-=-=-')
     },[])
 
     return(
@@ -118,7 +118,7 @@ function FAQ(){
 
                 {
                     questions.map(item => (
-                        <Question question={item.question} answer={item.answer}/>
+                        <Question key={item.question} question={item.question} answer={item.answer}/>
                     ))
                 }
                 

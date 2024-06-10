@@ -1,9 +1,9 @@
 import React from "react";
 import styles from './VisionProblemsBtn.module.css'
 
-function VisionProblemsBtn({onClick}){
+function VisionProblemsBtn({onClick, ...params}){
     return (
-    <div className={styles.visionBtn} onClick={onClick}>
+    <div {...params} className={styles.visionBtn} onClick={onClick}>
         <svg 
         className={styles.glasses}
             xmlns="http://www.w3.org/2000/svg" 
