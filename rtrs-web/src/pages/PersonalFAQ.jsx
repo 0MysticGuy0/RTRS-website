@@ -9,8 +9,6 @@ import Loading from '../components/loading/Loading';
 import Question from '../components/question/Question';
 
 function PersonalFAQ(){
-    const [userData, setUserData] = useState({email:'', password:'', name:'Влад', phone:'', address:'Благо', gender:''})
-
     const [questions, setQuestions] = useState([])
 
     //fetchers
@@ -29,7 +27,7 @@ function PersonalFAQ(){
 
     return (
         <div className='page appeals-page'>
-            <HeaderSmall userData={userData}/>
+            <HeaderSmall/>
 
             <div className='page__content'>
                 <NavPannel />

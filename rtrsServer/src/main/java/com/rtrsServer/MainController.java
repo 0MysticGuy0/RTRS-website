@@ -4,6 +4,8 @@ package com.rtrsServer;
 import com.rtrsServer.models.*;
 import com.rtrsServer.repositories.TVChannelRepository;
 import com.rtrsServer.services.*;
+import com.rtrsServer.utility.MailHelper;
+import com.rtrsServer.utility.MyPasswordEncryptor;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,7 @@ import java.util.List;
 @AllArgsConstructor
 public class MainController {
     private static final SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy");
+    private static final MyPasswordEncryptor encryptor = new MyPasswordEncryptor();
 
     private ChannelServiceImpl channelService;
     private TranslationObjectServiceImpl objectService;
@@ -27,12 +30,15 @@ public class MainController {
     private QuestionServiceImpl questionService;
     private TVChannelServiceImpl tvChannelService;
     private TVProgramServiceImpl tvProgramService;
+    private UserServiceImpl userService;
+
+
 
 
     @GetMapping
     public void getRoot(){
         System.out.println("-=-=-=-=");
-        generateData();
+        //generateData();
     }
 
     @GetMapping("/channels")
@@ -82,10 +88,61 @@ public class MainController {
         }
         return tvProgramService.getAllByDate(parsedDate);
     }
+    @GetMapping("/user")
+    public User getUser(@RequestParam String email){
+        return userService.getByEmail(email);
+    }
+    @GetMapping("/reset-password")
+    public String resetPassword(@RequestParam String email){
+        User user = userService.getByEmail(email);
+        if(user == null){
+            return "NO_ACC";
+        }
+        user.generatePassword();
+        userService.save(user);
+        MailHelper mailHelper = new MailHelper();
+        mailHelper.sendPassword(user.getEmail(), encryptor.decrypt(user.getPassword()));
+        return "success";
+    }
+    @GetMapping("/login")
+    public User login(@RequestParam String email, @RequestParam String password){
+        User user = userService.getByEmail(email);
+        System.out.println("entered passwd: "+encryptor.encrypt(password));
+        if(user == null || !user.getPassword().equals(encryptor.encrypt(password))){
+            return null;
+        }
+
+        return user;
+    }
 
     @PostMapping("/save-appeal")
     public Appeal saveAppeal(@RequestBody Appeal appeal){
         return appealService.save(appeal);
+    }
+    @PostMapping("/save-user")
+    public User saveUser(@RequestBody User user){
+        if(userService.getByEmail(user.getEmail()) != null) {
+            System.out.println("NON UNIQUE");
+            return null;
+        }
+        user.generatePassword();
+
+        MailHelper mailHelper = new MailHelper();
+        mailHelper.sendPassword(user.getEmail(), encryptor.decrypt(user.getPassword()));
+        return userService.save(user);
+    }
+    @PostMapping("/update-user")
+    public User updateUser(@RequestBody User user){
+        System.out.println("-=-=-=-=| TRYING UPDATE");
+        User found = userService.getByEmail(user.getEmail());
+        if(found == null) {
+            System.out.println("NO SUCH USER");
+            return null;
+        }
+
+        user.setPassword(encryptor.decrypt(found.getPassword()));
+
+        return userService.save(user);
     }
 
 
@@ -117,7 +174,7 @@ public class MainController {
         AppealStatus as3 = new AppealStatus("Закрыта");
         appealStatusService.save(as1);appealStatusService.save(as2);appealStatusService.save(as3);
 
-        appealService.save(new Appeal("test appeal asfasfas asf asf saf saf saf saf asf saf sfasaf safasfkashf jas","bychkovskiyvlad05@gmail.com", new Date(), "Благовещенск", as2, at1));
+        //appealService.save(new Appeal("test appeal asfasfas asf asf saf saf saf saf asf saf sfasaf safasfkashf jas","bychkovskiyvlad05@gmail.com", new Date(), "Благовещенск", as2, at1));
 
         Question q1 = new Question("ПОЧЕМУ ПОСЛЕ ПОДКЛЮЧЕНИЯ ПРИЕМНОГО ОБОРУДОВАНИЯ ИЗОБРАЖЕНИЕ ЧЕРНО-БЕЛОЕ?","Причиной черно-белого изображения может быть: 1. установленная в настройках телевизора вручную система цветности, отличная от PAL (например Secam или NTSC). В этом случае нужно найти в меню телевизора управление системой цветности и выставить значение PAL или авто. Именно в этом режиме по умолчанию транслируют видеосигнал цифровые приставки; 2. некорректно подключенные к телевизору «тюльпаны» (кабель RCA) цифровой приставки. В этом случае нужно подключить приставку через композитный вход (красный/белый - аудио, желтый - видео), если он есть, либо использовать разъемы SCART или HDMI и соответствующий кабель.");
         Question q2 = new Question("КАКОЕ РАЗРЕШЕНИЕ И КАЧЕСТВО В ЦИФРОВОМ ЭФИРНОМ ТЕЛЕВИДЕНИИ?","Трансляция идет в разрешении 720 на 576 пикселей (качество SD).");

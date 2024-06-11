@@ -4,7 +4,7 @@ import MySelect from '../UI/MySelect/MySelect';
 import styles from './RegistrationDialog.module.css'
 import { Link } from 'react-router-dom';
 
-function RegistrationDialog({userData, setUserData}){
+function RegistrationDialog({userData, setUserData, onSubmit}){
     const [acceptedPolicy, setAcceptedPolicy] = useState(true)
 
     return (
@@ -29,7 +29,7 @@ function RegistrationDialog({userData, setUserData}){
                         </tr>
                         <tr>
                             <td className={styles.bold}>Номер телефона</td>
-                            <td> <MyInput type='tel' placeholder='89000000000' value={userData.phone} onChange={val => setUserData({...userData, phone:val})}/> </td>
+                            <td> <MyInput type='tel' placeholder='89000000000' value={userData.phone_number} onChange={val => setUserData({...userData, phone_number:val})}/> </td>
                         </tr>
                         <tr>
                             <td className={styles.bold}>Адрес</td>
@@ -44,9 +44,10 @@ function RegistrationDialog({userData, setUserData}){
                     </span>
                 </div>
 
-                <button disabled={!acceptedPolicy} className={styles.registerBtn}
+                <button disabled={!acceptedPolicy || !userData.email.length>0} className={styles.registerBtn}
                 onClick={(e) => {
-                    console.log(userData)
+                    e.preventDefault()
+                    onSubmit()
                 }}>
                     Зарегистрироваться
                 </button>

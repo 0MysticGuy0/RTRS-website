@@ -23,7 +23,7 @@ function AppealDialog({userData, setUserData, typeOptions, sendAppeal}){
                         </tr>
                         <tr>
                             <td className={styles.bold}>Адрес</td>
-                            <td style={{paddingRight:'25px'}}> <MyInput style={{width:'100%'}} type='text' disabled placeholder='адрес' value={userData.address} /> </td>
+                            <td> <MyInput style={{width:'100%'}} type='text' disabled placeholder='адрес' value={userData.address} /> </td>
                         </tr>
                         <tr>
                             <td className={styles.bold}>Текст</td>
@@ -31,7 +31,7 @@ function AppealDialog({userData, setUserData, typeOptions, sendAppeal}){
                         </tr>
                         <tr>
                             <td className={styles.bold}>прикрепить файл</td>
-                            <td style={{paddingRight:'25px'}}> 
+                            <td> 
                                 <MyInput style={{width:'100%'}} type='file' placeholder='адрес'  onChange={val => console.log(val)}/> 
                             </td>
                         </tr>

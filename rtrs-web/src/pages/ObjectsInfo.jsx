@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Footer from '../components/footer/Footer';
 import HeaderSmall from '../components/header/HeaderSmall';
 import '../styles/App-authorized.css'
@@ -12,9 +12,11 @@ import axios from 'axios';
 import APIService from '../API/APIService';
 import { type } from '@testing-library/user-event/dist/type';
 import Loading from '../components/loading/Loading';
+import { AppContext } from '../context/AppContext';
 
 function ObjectsInfo(){
-    const [userData, setUserData] = useState({email:'', password:'', name:'Влад', phone:'', address:'', gender:''})
+    const {userData, setUserData} = useContext(AppContext)
+
     const [filters, setFilters] = useState({location:'1', type:'All'})
 
     const types = [{value:"All", name: 'ТВ и радио'},{value:"TV", name: 'ТВ'},{value:"Radio", name: 'Радио'}]
@@ -57,7 +59,7 @@ function ObjectsInfo(){
 
     return (
         <div className='page objects-info-page'>
-            <HeaderSmall userData={userData}/>
+            <HeaderSmall/>
 
             <div className='page__content'>
                 <NavPannel />

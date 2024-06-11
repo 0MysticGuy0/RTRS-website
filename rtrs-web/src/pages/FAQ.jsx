@@ -19,7 +19,6 @@ function FAQ(){
     })
 
     //initializers
-
     useEffect(()=>{
         fetchQuestions()
     },[])

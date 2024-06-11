@@ -2,22 +2,24 @@ import MyInput from "../UI/MyInput/MyInput";
 import '../../styles/App.css'
 import { Link, useNavigate } from "react-router-dom";
 
-function EnterAccount({userData, setUserData, rememberUser, setRememberUser,setIsregistrating, showPassword, setShowPassword}){
+function EnterAccount({userData, setUserData, rememberUser, setRememberUser,setIsregistrating, showPassword, setShowPassword, login, enteredWrong}){
     const cabinetNav = useNavigate()
-    function login(){
-        cabinetNav('/personal/objects-info',{restart:true})
-    }
+    
 
     return(
         <div className="login-page__right">
         <div className='login'>
             <span className="login__title">ВХОД</span>
             <hr/>
-            <MyInput value={userData.email} type="email" placeholder="Электронная почта" 
+            <MyInput 
+                style={enteredWrong?{borderColor:'red'}:{}}
+                value={userData.email} type="email" placeholder="Электронная почта" 
                 onChange={(val) => setUserData({...userData, email:val})}/>
 
             <div className='login__password'>
-                <MyInput value={userData.password} type={showPassword?'text':'password'} placeholder="Пароль"
+                <MyInput 
+                    style={enteredWrong?{borderColor:'red'}:{}}
+                    value={userData.password} type={showPassword?'text':'password'} placeholder="Пароль"
                     onChange={(val) => setUserData({...userData, password:val})}/>
                 <img 
                     onClick={() => setShowPassword(!showPassword)}

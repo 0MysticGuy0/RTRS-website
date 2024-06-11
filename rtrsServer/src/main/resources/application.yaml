@@ -8,9 +8,11 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     properties:
       format_sql: true
+passwordGenerator:
+  passwordLength: 10

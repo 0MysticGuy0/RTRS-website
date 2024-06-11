@@ -11,6 +11,7 @@
     gap: 10px;
     cursor: pointer;
     border-radius: 0 0 7px 7px;
+    visibility: hidden;
 }
 
 .glasses{

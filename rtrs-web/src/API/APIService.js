@@ -53,6 +53,30 @@ export default class APIService{
     static async sendAppeal(appeal){
         const responce = await axios.post(this.getAddressRoot() + '/save-appeal', appeal)
     return responce;
-}
+    }
+
+
+    static async login(email, password){
+        const responce = await axios.get(this.getAddressRoot()+'/login',{params:{
+            email, password
+        }})
+    return responce;
+    }
+    
+    static async register(user){
+        const responce = await axios.post(this.getAddressRoot()+'/save-user',user)
+        return responce;
+    }
+
+    static async updateUser(user){
+        const responce = await axios.post(this.getAddressRoot()+'/update-user',user)
+        return responce;
+    }
+    static async resetPassword(email){
+        const responce = await axios.get(this.getAddressRoot()+'/reset-password',{params:{
+            email: String(email)
+        }})
+        return responce
+    }
     
 }

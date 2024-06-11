@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import Footer from '../components/footer/Footer';
 import HeaderSmall from '../components/header/HeaderSmall';
 import '../styles/App-authorized.css'
@@ -15,9 +15,11 @@ import Appeal from '../components/appeal/Appeal';
 import MyModal from '../components/UI/MyModal/MyModal';
 import AppealDialog from '../components/AppealDialog/AppealDialog';
 import Loading from '../components/loading/Loading';
+import { AppContext } from '../context/AppContext';
 
 function Appeals(){
-    const [userData, setUserData] = useState({email:'bychkovskiyvlad05@gmail.com', password:'', name:'Влад', phone:'', address:'Благо', gender:''})
+    const {userData, setUserData} = useContext(AppContext)
+
     const [filters, setFilters] = useState({type:1})
     const [creatingAppeal, setCreatingAppeal] = useState(false)
 
@@ -74,7 +76,7 @@ function Appeals(){
 
     return (
         <div className='page appeals-page'>
-            <HeaderSmall userData={userData}/>
+            <HeaderSmall/>
 
             <MyModal visible={creatingAppeal} setVisible={setCreatingAppeal}>
                 <AppealDialog userData={userData} setUserData={setUserData} typeOptions={appealTypeOptions}

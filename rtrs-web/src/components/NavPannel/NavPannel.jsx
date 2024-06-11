@@ -12,7 +12,7 @@ function NavPannel({active}){
         {name:'Обращения', path:'/personal/appeals'},
         {name:'Типовые вопросы', path:'/personal/faq'},
         {name:'Телепрограмма', path:'/personal/programs'},
-        {name:'Настройки', path:'/c'},
+        {name:'Настройки', path:'/personal/settings'},
     ],[])
 
     function goAnotherTab(path){

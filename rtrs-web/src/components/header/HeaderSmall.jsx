@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styles from './HeaderSmall.module.css'
 import '../../styles/App-authorized.css'
 import VisionProblemsBtn from "../vision-problems-btn/VisionProblemsBtn";
 import { Link, useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
 
-function HeaderSmall({onVisionActivated, userData}){
+function HeaderSmall({onVisionActivated}){
+    const {authed, setAuthed, userData, setUserData} = useContext(AppContext)
+
     const nav = useNavigate()
     function goMain(){
         nav('/personal',{replace: true})
+    }
+
+    function logout(){
+        setUserData({email:"", gender:"M"})
+        setAuthed(false)
+        localStorage.removeItem('auth')
     }
 
     return(
@@ -30,8 +39,8 @@ function HeaderSmall({onVisionActivated, userData}){
 
                 <div className={styles.account}>
                     <img className={styles.account__icon} width='20px' src="/account.png" alt="иконка аккаунта" />
-                    <Link className={styles.headerInfo+' '+styles.accountBtn} to='/'>{userData?.name}</Link>
-                    <span className={(styles.headerInfo+' '+styles.logOutBtn)} >Выход</span>
+                    <Link className={styles.headerInfo+' '+styles.accountBtn} to='/personal/settings'>{userData?.name}</Link>
+                    <span className={(styles.headerInfo+' '+styles.logOutBtn)}  onClick={logout}>Выход</span>
                 </div>
             </div>
         </header>

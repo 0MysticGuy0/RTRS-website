@@ -10,7 +10,6 @@ import { useFetching } from '../hooks/useFetching';
 import Loading from '../components/loading/Loading';
 
 function Programs(){
-    const [userData, setUserData] = useState({email:'', password:'', name:'Влад', phone:'', address:'Благо', gender:''})
     const [selectedDate, setSelectedDate] = useState(new Date())
     const [search, setSearch] = useState('')
 
@@ -55,7 +54,7 @@ function Programs(){
 
     return (
         <div className='page programs-page'>
-            <HeaderSmall userData={userData}/>
+            <HeaderSmall/>
 
             <div className='page__content'>
                 <NavPannel />
